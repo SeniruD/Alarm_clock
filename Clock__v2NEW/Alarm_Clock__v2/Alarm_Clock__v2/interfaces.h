@@ -216,11 +216,7 @@ void alarmMenuInt(){
 		lcdSetCursor(1, 1);
 		lcdPrint("<Alarm Tones>");
 	}
-// 	else if (menuitem == 3)
-// 	{
-// 		lcdSetCursor(2, 1);
-// 		lcdPrint("<Alarm Tones>");
-// 	}
+
 }
 
 void settingMenuInt(){
@@ -276,27 +272,27 @@ void alarmTonesInt(){
 	if (menuitem == 1)
 	{
 		lcdSetCursor(2, 1);
-		lcdPrint("<Alarmtone1>");
+		lcdPrint("<Zelda AT1>");
 	}
 	else if (menuitem == 2)
 	{
 		lcdSetCursor(2, 1);
-		lcdPrint("<Alarmtone2>");
+		lcdPrint("<Green Slaves>");
 	}
 	else if (menuitem == 3)
 	{
 		lcdSetCursor(2, 1);
-		lcdPrint("<Alarmtone3>");
+		lcdPrint("<Star Wars>");
 	}
 	else if (menuitem == 4)
 	{
 		lcdSetCursor(2, 1);
-		lcdPrint("<Alarmtone4>");
+		lcdPrint("<Harry Potter>");
 	}
 	else if (menuitem == 5)
 	{
 		lcdSetCursor(2, 1);
-		lcdPrint("<Alarmtone5>");
+		lcdPrint("<Zelda AT2>");
 	}
 }
 

@@ -15,6 +15,7 @@
 #include "Lcd.h"
 #include "Interfaces.h"
 #include "TimeInputInterfaces.h"
+#include "Alarmtones.h"
 
 
 #include <stdio.h>
@@ -41,6 +42,8 @@ volatile bool up = false;
 volatile bool down = false;
 volatile bool select = false;
 volatile bool back = false;
+volatile bool play_music = false;
+
 
 int downButtonState = 0;
 int upButtonState = 0;
@@ -64,6 +67,7 @@ int main(void)
 	DDRD = 0x01; //Set PORTD 4,5,6,7 pins as input pins & Set PORTD0 pin as output
     PORTD = 0xF0; //Set PD0, PD1, PD6, PD7 to INPUT PULL_UP and LOW pin0
 	DDRB = 0xFF; // Set all PORTB as output
+	setBit(DDRC,3);
 	//clearBit(PORTD,0);   //Turn backlight off 
 	lcdInit();
 	
@@ -86,11 +90,22 @@ int main(void)
 		sprintf(n,"%02x%02x",(hor),(min));
 		for (int i = 0; i <= alarmNo;i++){
 			if ((alarmHoursList[i]==atoi(n)/100) && (alarmMinsList[i]==atoi(n)%100)){
-				PORTC=(1<<PORTC3);
-				_delay_ms(100);
-			}
-			else{
-				PORTC=(0<<PORTC3);
+				switch(alarmMelodyList[i]){
+					case 1:
+					musicplay(melody1, sizeof(melody1), sizeof(melody1[0]),108);
+					break;
+					case 2:
+					musicplay(melody2, sizeof(melody2), sizeof(melody2[0]),70);
+					break;
+					case 3:
+					musicplay(melody3, sizeof(melody3), sizeof(melody3[0]),140);
+					break;
+					case 4:
+					musicplay(melody4, sizeof(melody4), sizeof(melody4[0]),144);
+					break;
+					case 5:
+					musicplay(melody5, sizeof(melody5), sizeof(melody5[0]),108);
+				}
 			}
 		}
 
@@ -345,7 +360,25 @@ int main(void)
 				page = 12;
 				menuitem = 1;
 			}
-		}
+			else if (page == 9)
+			{
+					if(menuitem == 1){
+						musicplay(melody1, sizeof(melody1), sizeof(melody1[0]),108);
+					}
+					else if(menuitem == 2){
+						musicplay(melody2, sizeof(melody2), sizeof(melody2[0]),70);
+					}
+					else if(menuitem == 3){
+						musicplay(melody3, sizeof(melody3), sizeof(melody3[0]),140);
+					}
+					else if(menuitem == 4){
+						musicplay(melody4, sizeof(melody4), sizeof(melody4[0]),144);
+					}
+					else if(menuitem == 5){
+						musicplay(melody5, sizeof(melody5), sizeof(melody5[0]),108);
+					}
+				}
+			}
 		
 		//---------------------------------------BACK button functions-------------------------------------------------------------- 
 		if (back) {
@@ -415,7 +448,7 @@ int main(void)
 			{
 				lcdClear();
 				page = 3;
-				menuitem = 3;
+				menuitem = 2;
 			}
 			else if (page == 10)
 			{

@@ -18,6 +18,7 @@ int startmins;
 int startdate;
 int startmnth;
 int startyr;
+int tone_no = 1;
 
 int startAlarmHr=0;	
 int startAlarmMin=0;
@@ -26,9 +27,8 @@ int startAlarmMin=0;
 
 int alarmHoursList[7] = {0};	//Contains alarm hours of 7 alarms
 int alarmMinsList[7] = {0};		//Contains alarm minutes of 7 alarms
-
 int alarmStatus[7] = {0};		//status of each alarm; 0 = off, 1 = on
-	
+int alarmMelodyList[7] = {0};		//Contains alarm tone no of 7 alarms	
 /*--------------------------------------------------------------------------------------------*/
 
 int noOfSetAlarms = 0;
@@ -355,6 +355,50 @@ void editAlarmInt(int currentAlarm)		//set or modify alarms
 		}
 		_delay_ms(del);
 	}
+	_delay_ms(del);
+	
+	while(true)
+	{
+		
+		char str_tone[10];
+		sprintf(str_tone,"%d",tone_no);
+		lcdSetCursor(0,0);
+		lcdPrint("   Select Tone   ");
+		lcdSetCursor(3,1);
+		lcdPrint("<<Tone ");
+		lcdSetCursor(10,1);
+		lcdPrint(str_tone);
+		lcdSetCursor(11,1);
+		lcdPrint(">>");
+		if (pressed_button(PIND5))
+		{
+			tone_no++;
+			if (tone_no>5)
+			{
+				tone_no=1;
+			}
+		}
+		else if (pressed_button(PIND7))
+		{
+			tone_no--;
+			if (tone_no<0)
+			{
+				tone_no=5;
+			}
+		}
+		else if (pressed_button(PIND6))
+		{
+			alarmMelodyList[alarmNo-1]=tone_no;
+			
+			break;
+		}
+		else if (pressed_button(PIND4))
+		{
+			break;
+		}
+		_delay_ms(del);
+	}
+	_delay_ms(del);
 	if (alarmStatus[currentAlarm-1]==0)
 	{
 		alarmStatus[currentAlarm-1]=1;
