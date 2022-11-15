@@ -29,7 +29,9 @@ Features of the clock
 
 ## PCB Design
 <img title="PCB Design" alt="Alt text" src="/Photos_/PCB.png">
+
 ## Enclosure Design
 <img title="Enclosure Design" alt="Alt text" src="/Photos_/Enclosure_design.png">
+
 ## Final Assembly
 <img title="Final Assembly" alt="Alt text" src="/Photos_/FinalAssembly.png">
